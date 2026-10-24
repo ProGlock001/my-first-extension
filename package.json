@@ -1,0 +1,65 @@
+{
+  "name": "my-first-extension",
+  "displayName": "Copy-Paste Meter",
+  "description": "Показывает, какой процент кода в файле скопирован, а какой написан вручную",
+  "version": "0.0.1",
+  "publisher": "ProGlock001",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ProGlock001/my-first-extension"
+  },
+  "engines": {
+    "vscode": "^1.100.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "copyPasteMeter.showReport",
+        "title": "Copy-Paste Meter: Показать статистику файла"
+      },
+      {
+        "command": "copyPasteMeter.toggleHighlight",
+        "title": "Copy-Paste Meter: Подсветить скопированный код"
+      },
+      {
+        "command": "copyPasteMeter.reset",
+        "title": "Copy-Paste Meter: Сбросить статистику файла"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "copyPasteMeter.paste",
+        "key": "ctrl+v",
+        "mac": "cmd+v",
+        "when": "editorTextFocus && !editorReadonly"
+      }
+    ],
+    "configuration": {
+      "title": "Copy-Paste Meter",
+      "properties": {
+        "copyPasteMeter.pasteThreshold": {
+          "type": "number",
+          "default": 30,
+          "description": "Сколько непробельных символов, появившихся за одну правку, считать вставкой (даже без Ctrl+V)."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "vscode:prepublish": "npm run compile"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/vscode": "1.100.0",
+    "typescript": "^5.5.0"
+  }
+}
